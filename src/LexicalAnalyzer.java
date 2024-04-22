@@ -93,6 +93,27 @@ public class LexicalAnalyzer {
                             allTokens.put(start, new Token("T_Char", "char")); // char
                         }
                     }
+                } else if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                            pointer++;
+                            if (lang.charAt(pointer) == 'i' && pointer < lang.length()){
+                                pointer++;
+                                if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                                    pointer++;
+                                    if (lang.charAt(pointer) == 'u' && pointer < lang.length()){
+                                        pointer++;
+                                        if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                                            pointer++;
+                                            allTokens.put(start, new Token("T_Continue", "continue")); // continue
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
