@@ -55,6 +55,23 @@ public class LexicalAnalyzer {
 
     //hossein
     public static void keywordIdentifier() {
+        int start = 0;
+        int pointer = 0;
+        while (start < lang.length()) {
+            if (lang.charAt(pointer) == 'b'){
+                pointer++;
+                if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 'l' && pointer < lang.length()) {
+                            pointer++;
+                            allTokens.put(start, new Token("T_Bool", "bool"));
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -63,7 +80,6 @@ public class LexicalAnalyzer {
 
     }
 
-    //reza
     public static void scopeIdentifier() {
         for (int i = 0; i < lang.length(); i++) {
             if (lang.charAt(i) == '{')
@@ -101,7 +117,6 @@ public class LexicalAnalyzer {
 
     }
 
-    //hossein
     public static void whiteSpaceIdentifier() {
         for(int i = 0 ; i < lang.length() ; i++){
             if (lang.charAt(i) == ' ')
