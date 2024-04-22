@@ -127,6 +127,21 @@ public class LexicalAnalyzer {
                         }
                     }
                 }
+            } else if (lang.charAt(start) == 'f'){
+                pointer++;
+                if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'l' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 's' && pointer < lang.length()){
+                            pointer++;
+                            if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                                pointer++;
+                                allTokens.put(start, new Token("T_False", "false")); // false
+                            }
+                        }
+                    }
+                }
             }
         }
 
