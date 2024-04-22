@@ -69,6 +69,18 @@ public class LexicalAnalyzer {
                             allTokens.put(start, new Token("T_Bool", "bool"));
                         }
                     }
+                } else if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                            pointer++;
+                            if (lang.charAt(pointer) == 'k' && pointer < lang.length()){
+                                pointer++;
+                                allTokens.put(start, new Token("T_Break", "break"));
+                            }
+                        }
+                    }
                 }
             }
         }
