@@ -58,54 +58,54 @@ public class LexicalAnalyzer {
         int start = 0;
         int pointer = 0;
         while (start < lang.length()) {
-            if (lang.charAt(pointer) == 'b'){
+            if (lang.charAt(pointer) == 'b') {
                 pointer++;
-                if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'o') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'o') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'l' && pointer < lang.length()) {
+                        if (lang.charAt(pointer) == 'l') {
                             pointer++;
                             allTokens.put(start, new Token("T_Bool", "bool")); // bool
                         }
                     }
-                } else if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                } else if (lang.charAt(pointer) == 'r') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'e') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'a') {
                             pointer++;
-                            if (lang.charAt(pointer) == 'k' && pointer < lang.length()){
+                            if (lang.charAt(pointer) == 'k') {
                                 pointer++;
                                 allTokens.put(start, new Token("T_Break", "break")); // break
                             }
                         }
                     }
                 }
-            } else if (lang.charAt(start) == 'c'){
+            } else if (lang.charAt(start) == 'c') {
                 pointer++;
-                if (lang.charAt(pointer) == 'h' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'h') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'a') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'r') {
                             pointer++;
                             allTokens.put(start, new Token("T_Char", "char")); // char
                         }
                     }
-                } else if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                } else if (lang.charAt(pointer) == 'o') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'n') {
                         pointer++;
-                        if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 't') {
                             pointer++;
-                            if (lang.charAt(pointer) == 'i' && pointer < lang.length()){
+                            if (lang.charAt(pointer) == 'i') {
                                 pointer++;
-                                if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                                if (lang.charAt(pointer) == 'n') {
                                     pointer++;
-                                    if (lang.charAt(pointer) == 'u' && pointer < lang.length()){
+                                    if (lang.charAt(pointer) == 'u') {
                                         pointer++;
-                                        if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                                        if (lang.charAt(pointer) == 'e') {
                                             pointer++;
                                             allTokens.put(start, new Token("T_Continue", "continue")); // continue
                                         }
@@ -115,77 +115,77 @@ public class LexicalAnalyzer {
                         }
                     }
                 }
-            } else if (lang.charAt(start) == 'e'){
+            } else if (lang.charAt(start) == 'e') {
                 pointer++;
-                if (lang.charAt(pointer) == 'l' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'l') {
                     pointer++;
-                    if (lang.charAt(pointer) == 's' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 's') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'e') {
                             pointer++;
                             allTokens.put(start, new Token("T_Else", "else")); // else
                         }
                     }
                 }
-            } else if (lang.charAt(start) == 'f'){
+            } else if (lang.charAt(start) == 'f') {
                 pointer++;
-                if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'a') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'l' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'l') {
                         pointer++;
-                        if (lang.charAt(pointer) == 's' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 's') {
                             pointer++;
-                            if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                            if (lang.charAt(pointer) == 'e') {
                                 pointer++;
                                 allTokens.put(start, new Token("T_False", "false")); // false
                             }
                         }
                     }
-                } else if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                } else if (lang.charAt(pointer) == 'o') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'r') {
                         pointer++;
                         allTokens.put(start, new Token("T_For", "for")); // for
                     }
                 }
-            } else if (lang.charAt(start) == 'i'){
+            } else if (lang.charAt(start) == 'i') {
                 pointer++;
-                if (lang.charAt(pointer) == 'f' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'f') {
                     pointer++;
                     allTokens.put(start, new Token("T_If", "if")); // if
-                } else if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                } else if (lang.charAt(pointer) == 'n') {
                     pointer++;
-                    if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 't') {
                         pointer++;
                         allTokens.put(start, new Token("T_Int", "int")); // int
                     }
                 }
-            } else if (lang.charAt(start) == 'p'){
+            } else if (lang.charAt(start) == 'p') {
                 pointer++;
-                if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'r') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'i' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'i') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'n') {
                             pointer++;
-                            if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                            if (lang.charAt(pointer) == 't') {
                                 pointer++;
                                 allTokens.put(start, new Token("T_Print", "print")); // print
                             }
                         }
                     }
                 }
-            } else if (lang.charAt(start) == 'r'){
+            } else if (lang.charAt(start) == 'r') {
                 pointer++;
-                if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'e') {
                     pointer++;
-                    if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 't') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'u' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'u') {
                             pointer++;
-                            if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                            if (lang.charAt(pointer) == 'r') {
                                 pointer++;
-                                if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                                if (lang.charAt(pointer) == 'n') {
                                     pointer++;
                                     allTokens.put(start, new Token("T_Return", "return")); // return
                                 }
@@ -193,13 +193,13 @@ public class LexicalAnalyzer {
                         }
                     }
                 }
-            } else if (lang.charAt(start) == 't'){
+            } else if (lang.charAt(start) == 't') {
                 pointer++;
-                if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                if (lang.charAt(pointer) == 'r') {
                     pointer++;
-                    if (lang.charAt(pointer) == 'u' && pointer < lang.length()){
+                    if (lang.charAt(pointer) == 'u') {
                         pointer++;
-                        if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                        if (lang.charAt(pointer) == 'e') {
                             pointer++;
                             allTokens.put(start, new Token("T_True", "true")); // true
                         }
@@ -253,7 +253,7 @@ public class LexicalAnalyzer {
     }
 
     public static void whiteSpaceIdentifier() {
-        for(int i = 0 ; i < lang.length() ; i++){
+        for (int i = 0; i < lang.length(); i++) {
             if (lang.charAt(i) == ' ')
                 allTokens.put(i, new Token("T_Whitespace", " "));
             else if (lang.charAt(i) == '\n')
