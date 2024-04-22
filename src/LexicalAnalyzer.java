@@ -141,6 +141,12 @@ public class LexicalAnalyzer {
                             }
                         }
                     }
+                } else if (lang.charAt(pointer) == 'o' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                        pointer++;
+                        allTokens.put(start, new Token("T_For", "for")); // for
+                    }
                 }
             }
         }
