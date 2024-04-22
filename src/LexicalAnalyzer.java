@@ -106,7 +106,10 @@ public class LexicalAnalyzer {
         for(int i = 0 ; i < lang.length() ; i++){
             if (lang.charAt(i) == ' ')
                 allTokens.put(i, new Token("T_Whitespace", " "));
-
+            else if (lang.charAt(i) == '\n')
+                allTokens.put(i, new Token("T_Whitespace", "\n"));
+            else if (lang.charAt(i) == '\t')
+                allTokens.put(i, new Token("T_Whitespace", "\t"));
         }
     }
 }
