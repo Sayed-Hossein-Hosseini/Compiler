@@ -148,6 +148,12 @@ public class LexicalAnalyzer {
                         allTokens.put(start, new Token("T_For", "for")); // for
                     }
                 }
+            } else if (lang.charAt(start) == 'i'){
+                pointer++;
+                if (lang.charAt(pointer) == 'f' && pointer < lang.length()){
+                    pointer++;
+                    allTokens.put(start, new Token("T_If", "if")); // if
+                }
             }
         }
 
