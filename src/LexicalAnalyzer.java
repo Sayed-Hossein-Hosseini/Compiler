@@ -103,6 +103,10 @@ public class LexicalAnalyzer {
 
     //hossein
     public static void whiteSpaceIdentifier() {
+        for(int i = 0 ; i < lang.length() ; i++){
+            if (lang.charAt(i) == ' ')
+                allTokens.put(i, new Token("T_Whitespace", " "));
 
+        }
     }
 }
