@@ -66,7 +66,7 @@ public class LexicalAnalyzer {
                         pointer++;
                         if (lang.charAt(pointer) == 'l' && pointer < lang.length()) {
                             pointer++;
-                            allTokens.put(start, new Token("T_Bool", "bool"));
+                            allTokens.put(start, new Token("T_Bool", "bool")); // bool
                         }
                     }
                 } else if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
@@ -77,8 +77,20 @@ public class LexicalAnalyzer {
                             pointer++;
                             if (lang.charAt(pointer) == 'k' && pointer < lang.length()){
                                 pointer++;
-                                allTokens.put(start, new Token("T_Break", "break"));
+                                allTokens.put(start, new Token("T_Break", "break")); // break
                             }
+                        }
+                    }
+                }
+            } else if (lang.charAt(start) == 'c'){
+                pointer++;
+                if (lang.charAt(pointer) == 'h' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'a' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                            pointer++;
+                            allTokens.put(start, new Token("T_Char", "char")); // char
                         }
                     }
                 }
