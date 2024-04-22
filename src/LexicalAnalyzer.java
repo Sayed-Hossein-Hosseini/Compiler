@@ -160,6 +160,21 @@ public class LexicalAnalyzer {
                         allTokens.put(start, new Token("T_Int", "int")); // int
                     }
                 }
+            } else if (lang.charAt(start) == 'p'){
+                pointer++;
+                if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 'i' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                            pointer++;
+                            if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                                pointer++;
+                                allTokens.put(start, new Token("T_Print", "print")); // print
+                            }
+                        }
+                    }
+                }
             }
         }
 
