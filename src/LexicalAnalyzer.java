@@ -175,6 +175,24 @@ public class LexicalAnalyzer {
                         }
                     }
                 }
+            } else if (lang.charAt(start) == 'r'){
+                pointer++;
+                if (lang.charAt(pointer) == 'e' && pointer < lang.length()){
+                    pointer++;
+                    if (lang.charAt(pointer) == 't' && pointer < lang.length()){
+                        pointer++;
+                        if (lang.charAt(pointer) == 'u' && pointer < lang.length()){
+                            pointer++;
+                            if (lang.charAt(pointer) == 'r' && pointer < lang.length()){
+                                pointer++;
+                                if (lang.charAt(pointer) == 'n' && pointer < lang.length()){
+                                    pointer++;
+                                    allTokens.put(start, new Token("T_Return", "return")); // return
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
