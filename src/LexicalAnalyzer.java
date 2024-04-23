@@ -123,7 +123,7 @@ public class LexicalAnalyzer {
                     if (lang.charAt(pointer) == 's') {
                         pointer++;
                         if (lang.charAt(pointer) == 'e') {
-                            falg = false;
+                            flag = false;
                             allTokens.put(start, new Token("T_Else", "else")); // else
                         }
                     }
