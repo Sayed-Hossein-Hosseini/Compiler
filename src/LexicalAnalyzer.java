@@ -170,7 +170,8 @@ public class LexicalAnalyzer {
                         if (lang.charAt(pointer) == 'n') {
                             pointer++;
                             if (lang.charAt(pointer) == 't') {
-                                flag = false;;
+                                flag = false;
+                                ;
                                 allTokens.put(start, new Token("T_Print", "print")); // print
                             }
                         }
@@ -206,6 +207,18 @@ public class LexicalAnalyzer {
                         }
                     }
                 }
+            }
+
+            if (flag) { // next word athuentication
+                while (pointer < lang.length()) {
+                    if (lang.charAt(pointer) == ' ') {
+                        start = pointer;
+                        break;
+                    }
+                    pointer++;
+                }
+            } else {
+                start = pointer + 1;
             }
         }
 
