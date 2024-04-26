@@ -501,7 +501,79 @@ public class LexicalAnalyzer {
     }
 
     private static void constCharsIdentifier() {
+        int start = 0;
+        int pointer = 0;
+        while (start < lang.length()) {
+            if (lang.charAt(pointer) == 39) { // Character
+                pointer++;
+                if (checkPointer(pointer))
+                    return;
+                if (lang.charAt(pointer) == 92) {
+                    pointer++;
+                    if (checkPointer(pointer))
+                        return;
+                    if (lang.charAt(pointer) == 39) {
+                        pointer++;
+                        if (checkPointer(pointer))
+                            return;
+                        if (lang.charAt(pointer) == 39){
+                            allTokens.put(pointer , new Token("T_Character" , "'")); // T_Character : token -> '
+                        }
+                    }
+                } else if (lang.charAt(pointer) == 92) {
+                    pointer++;
+                    if (checkPointer(pointer))
+                        return;
+                    if (lang.charAt(pointer) == 39) {
+                        allTokens.put(pointer , new Token("T_Character" , "\\")); // T_Character : token -> \
+                    }
+                } else {
+                    pointer++;
+                    if (checkPointer(pointer))
+                        return;
+                    if (lang.charAt(pointer) == 39) {
+                        allTokens.put(pointer , new Token("T_Character" , "'" + lang.charAt(pointer - 1) + "'")); // T_character
+                    }
+                }
+            } else if (lang.charAt(pointer) == 34) {
+                pointer++;
+                if (checkPointer(pointer))
+                    return;
+                String string = "";
+                while (true) {
+                    if (lang.charAt(pointer) == 92) {
+                        pointer++;
+                        if (checkPointer(pointer))
+                            return;
+                        if (lang.charAt(pointer) == 34) {
+                            string += lang.charAt(pointer); // \"
+                            pointer++;
+                            if (checkPointer(pointer))
+                                return;
+                            continue;
+                        } else {
+                            string += lang.charAt(pointer); // not \"
+                            pointer++;
+                            if (checkPointer(pointer))
+                                return;
+                            continue;
+                        }
+                    } else if (lang.charAt(pointer) == 34) {
+                        allTokens.put(pointer , new Token("T_String" , string)); // T_String
+                        break;
+                    } else {
+                        string += lang.charAt(pointer); // continue
+                        pointer++;
+                        if (checkPointer(pointer))
+                            return;
+                    }
+                }
+            }
 
+            pointer++;
+            start = pointer;
+
+        }
     }
 
     private static void operatorIdentifier() {

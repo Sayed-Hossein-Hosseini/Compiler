@@ -2,7 +2,9 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        LexicalAnalyzer.analyze();
+//        LexicalAnalyzer.analyze();
+        char p = 39;
+        System.out.println(p);
     }
 }
 
