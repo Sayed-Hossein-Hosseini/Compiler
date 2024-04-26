@@ -64,7 +64,7 @@ public class LexicalAnalyzer {
         hexadecimalIdentifier();
         operatorIdentifier();
         whiteSpaceIdentifier();
-        constCharsIdentifier();
+//        constCharsIdentifier();
 
         output();
     }
@@ -107,9 +107,11 @@ public class LexicalAnalyzer {
                 FileWriter address = new FileWriter(fileName);
 
                 for (int x : sortedKeys) {
-                    address.write(x + allTokens.get(x).toString());
+                    address.write(x + allTokens.get(x).toString() + "\n");
                     System.out.println(x + allTokens.get(x).toString());
                 }
+
+                address.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
