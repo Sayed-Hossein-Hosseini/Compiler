@@ -65,7 +65,7 @@ public class LexicalAnalyzer {
         hexadecimalIdentifier();
         operatorIdentifier();
         whiteSpaceIdentifier();
-//        constCharsIdentifier();
+        constCharsIdentifier();
 
         output();
     }
