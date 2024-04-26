@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 public class LexicalAnalyzer {
@@ -49,10 +50,10 @@ public class LexicalAnalyzer {
 //            "}";
 
     static private Map<Integer, Token> allTokens = new HashMap<>();
+    static private int numberProgramme = 0; // number programme file
 
     public static void analyze() {
         input();
-        output();
     }
 
     private static void tokenizer() {
@@ -65,7 +66,7 @@ public class LexicalAnalyzer {
         whiteSpaceIdentifier();
         constCharsIdentifier();
 
-        sortByKey();
+        output();
     }
 
     private static void input() { // programm input
@@ -74,8 +75,9 @@ public class LexicalAnalyzer {
             File directory = new File("D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input");
             String [] input = directory.list();
             String fileName = "";
+            numberProgramme = input.length;
 
-            for (int lengthFile = 0 ; lengthFile < input.length ; lengthFile++)
+            for (int lengthFile = 0 ; lengthFile < numberProgramme ; lengthFile++)
                 fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input\\" + input[lengthFile];
                 File address = new File(fileName);
                 Scanner programm = new Scanner(address);
@@ -91,7 +93,27 @@ public class LexicalAnalyzer {
     }
 
     private static void output(){ // token output
+        ArrayList<Integer> sortedKeys = new ArrayList<>(allTokens.keySet());
 
+        Collections.sort(sortedKeys);
+
+        try {
+            String dir = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output" ;
+            File directory = new File("D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output");
+            String fileName = "";
+
+            for (int lengthFile = 0 ; lengthFile < numberProgramme ; lengthFile++)
+                fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output\\" + "output " + (lengthFile + 1) + ".txt";
+                FileWriter address = new FileWriter(fileName);
+
+                for (int x : sortedKeys) {
+                    address.write(x + allTokens.get(x).toString());
+                    System.out.println(x + allTokens.get(x).toString());
+                }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void keywordIdentifier() {
@@ -577,14 +599,5 @@ public class LexicalAnalyzer {
 
     private static boolean isString(String identifier) {
         return identifier.startsWith("\"") && identifier.endsWith("\"");
-    }
-
-    private static void sortByKey() {
-        ArrayList<Integer> sortedKeys = new ArrayList<>(allTokens.keySet());
-
-        Collections.sort(sortedKeys);
-
-        for (int x : sortedKeys)
-            System.out.println(x + allTokens.get(x).toString());
     }
 }
