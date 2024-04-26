@@ -1,60 +1,61 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 
 public class LexicalAnalyzer {
     // test String.
-    static private String lang =
-            "int test_function(int a, int b, bool c){\n" +
-            "\t// this is a function\n" +
-            "\tif (c == true){\n" +
-            "\t\treturn a+b;\n" +
-            "\t}\n" +
-            "\telse {\n" +
-            "\t\treturn a-b;\n" +
-            "\t}\n" +
-            "}\n" +
-            "\n" +
-            "int main(){\n" +
-            "\tbool add = true;\n" +
-            "\tchar _assign1 = '=';\n" +
-            "\tchar String_1[] = \" + \";\n" +
-            "\tchar String_2[] = \" - \";\n" +
-            "\tfor(int i = 0; i <= (+10 / 2); i = i + 1){\n" +
-            "\t\tfor (int j = 0x0; j != (5 * -1)  ; j = j - 1){\n" +
-            "\t\t\tprint(i);\n" +
-            "\t\t\tprint(String_1);\n" +
-            "\t\t\tprint(j);\n" +
-            "\t\t\tprint(_assign1);\n" +
-            "\t\t\tprint(test_function(i,j,add));\n" +
-            "\t\t}\n" +
-            "\t}\n" +
-            "\tadd = false;\n" +
-            "\tfor (int i = 0; !(i == +5); i = i + 1) {\n" +
-            "\t\tfor (int j = 0x0; j >= -5; j = j - 1) {\n" +
-            "\t\t\tif((i % 4) == 0 || (i % 3) == 0)\n" +
-            "\t\t\t\tcontinue;\n" +
-            "\t\t\tif(j < -4 && i > 3)\n" +
-            "\t\t\t\tbreak;\n" +
-            "\t\t\tprint(i);\n" +
-            "\t\t\tprint(String_2);\n" +
-            "\t\t\tprint(j);\n" +
-            "\t\t\tprint(_assign1);\n" +
-            "\t\t\tprint(test_function(i, j, add));\n" +
-            "\t\t}\n" +
-            "\t}\n" +
-            "\tprint(\"this is\\\" a whole string no other token like '=' or 'else' or even \\\\\\\\comment should be recognized\");\n" +
-            "\tchar back = '\\\\';\n" +
-            "\tchar quote = '\\'';\n" +
-            "\tint _123 = 0XABCdef1230;\n" +
-            "}";
+    static private String lang = "";
+//            "int test_function(int a, int b, bool c){\n" +
+//            "\t// this is a function\n" +
+//            "\tif (c == true){\n" +
+//            "\t\treturn a+b;\n" +
+//            "\t}\n" +
+//            "\telse {\n" +
+//            "\t\treturn a-b;\n" +
+//            "\t}\n" +
+//            "}\n" +
+//            "\n" +
+//            "int main(){\n" +
+//            "\tbool add = true;\n" +
+//            "\tchar _assign1 = '=';\n" +
+//            "\tchar String_1[] = \" + \";\n" +
+//            "\tchar String_2[] = \" - \";\n" +
+//            "\tfor(int i = 0; i <= (+10 / 2); i = i + 1){\n" +
+//            "\t\tfor (int j = 0x0; j != (5 * -1)  ; j = j - 1){\n" +
+//            "\t\t\tprint(i);\n" +
+//            "\t\t\tprint(String_1);\n" +
+//            "\t\t\tprint(j);\n" +
+//            "\t\t\tprint(_assign1);\n" +
+//            "\t\t\tprint(test_function(i,j,add));\n" +
+//            "\t\t}\n" +
+//            "\t}\n" +
+//            "\tadd = false;\n" +
+//            "\tfor (int i = 0; !(i == +5); i = i + 1) {\n" +
+//            "\t\tfor (int j = 0x0; j >= -5; j = j - 1) {\n" +
+//            "\t\t\tif((i % 4) == 0 || (i % 3) == 0)\n" +
+//            "\t\t\t\tcontinue;\n" +
+//            "\t\t\tif(j < -4 && i > 3)\n" +
+//            "\t\t\t\tbreak;\n" +
+//            "\t\t\tprint(i);\n" +
+//            "\t\t\tprint(String_2);\n" +
+//            "\t\t\tprint(j);\n" +
+//            "\t\t\tprint(_assign1);\n" +
+//            "\t\t\tprint(test_function(i, j, add));\n" +
+//            "\t\t}\n" +
+//            "\t}\n" +
+//            "\tprint(\"this is\\\" a whole string no other token like '=' or 'else' or even \\\\\\\\comment should be recognized\");\n" +
+//            "\tchar back = '\\\\';\n" +
+//            "\tchar quote = '\\'';\n" +
+//            "\tint _123 = 0XABCdef1230;\n" +
+//            "}";
 
     static private Map<Integer, Token> allTokens = new HashMap<>();
 
     public static void analyze() {
         input();
+//        output();
+    }
 
+    private static void tokenizer() {
         keywordIdentifier();
         idIdentifier();
         scopeIdentifier();
@@ -65,12 +66,26 @@ public class LexicalAnalyzer {
         constCharsIdentifier();
 
         sortByKey();
-
-        output();
     }
 
     private static void input() { // programm input
+        try {
+            String dir = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input" ;
+            File directory = new File("D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input");
+            String [] input = directory.list();
+            String fileName = "";
 
+            for (int lengthFile = 0 ; lengthFile < input.length ; lengthFile++)
+                fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input\\" + input[lengthFile];
+                File address = new File(fileName);
+                Scanner programm = new Scanner(address);
+
+                while (programm.hasNextLine())
+                    lang += programm.nextLine();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void output(){ // token output
