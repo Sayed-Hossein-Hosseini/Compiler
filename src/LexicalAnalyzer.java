@@ -52,7 +52,7 @@ public class LexicalAnalyzer {
 
     public static void analyze() {
         input();
-//        output();
+        output();
     }
 
     private static void tokenizer() {
@@ -81,7 +81,7 @@ public class LexicalAnalyzer {
                 Scanner programm = new Scanner(address);
 
                 while (programm.hasNextLine())
-                    lang += programm.nextLine();
+                    lang += programm.nextLine().strip();
 
                 tokenizer(); // tokenizer programm
 
