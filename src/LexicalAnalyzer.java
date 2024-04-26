@@ -83,6 +83,8 @@ public class LexicalAnalyzer {
                 while (programm.hasNextLine())
                     lang += programm.nextLine();
 
+                tokenizer(); // tokenizer programm
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
