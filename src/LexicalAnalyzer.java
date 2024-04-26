@@ -57,7 +57,6 @@ public class LexicalAnalyzer {
     }
 
     private static void tokenizer() {
-        System.out.println(lang.charAt(891) + "***" + lang.charAt(893) + "***" + lang.charAt(896));
 
         keywordIdentifier();
         idIdentifier();
