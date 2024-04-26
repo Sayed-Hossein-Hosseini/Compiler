@@ -1,6 +1,6 @@
 public class Token {
-    String tokenType;
-    String tokenName;
+    private String tokenType;
+    private String tokenName;
 
     public Token(String tokenType, String tokenName) {
         this.tokenName = tokenName;
