@@ -57,6 +57,8 @@ public class LexicalAnalyzer {
     }
 
     private static void tokenizer() {
+        System.out.println(lang.charAt(891) + "***" + lang.charAt(893) + "***" + lang.charAt(896));
+
         keywordIdentifier();
         idIdentifier();
         scopeIdentifier();
@@ -571,9 +573,9 @@ public class LexicalAnalyzer {
         for (int i = 0; i < lang.length(); i++) {
             if (lang.charAt(i) == ' ')
                 allTokens.put(i, new Token("T_Whitespace", " "));
-            else if (lang.charAt(i) == '\n')
+            else if (lang.charAt(i) == 92 && lang.charAt(i + 1) == 'n')
                 allTokens.put(i, new Token("T_Whitespace", "\\n"));
-            else if (lang.charAt(i) == '\t')
+            else if (lang.charAt(i) == 92 && lang.charAt(i + 1) == 't')
                 allTokens.put(i, new Token("T_Whitespace", "\\t"));
         }
     }
