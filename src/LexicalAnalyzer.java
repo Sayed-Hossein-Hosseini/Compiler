@@ -5,7 +5,8 @@ import java.util.Map;
 
 public class LexicalAnalyzer {
     // test String.
-    static private String lang = "int test_function(int a, int b, bool c){\n" +
+    static private String lang =
+            "int test_function(int a, int b, bool c){\n" +
             "\t// this is a function\n" +
             "\tif (c == true){\n" +
             "\t\treturn a+b;\n" +
@@ -64,7 +65,6 @@ public class LexicalAnalyzer {
         sortByKey();
     }
 
-    //hossein
     private static void keywordIdentifier() {
         int start = 0;
         int pointer = 0;
@@ -326,7 +326,6 @@ public class LexicalAnalyzer {
 
     }
 
-    //reza
     private static void idIdentifier() {
         StringBuilder name = new StringBuilder();
         int start = 0;
@@ -368,8 +367,6 @@ public class LexicalAnalyzer {
         }
     }
 
-
-
     private static void scopeIdentifier() {
         for (int i = 0; i < lang.length(); i++) {
             if (lang.charAt(i) == '{')
@@ -392,7 +389,6 @@ public class LexicalAnalyzer {
         }
     }
 
-    //reza
     private static void decimalIdentifier() {
         StringBuilder name = new StringBuilder();
         boolean isNumber = false;
@@ -449,12 +445,11 @@ public class LexicalAnalyzer {
             }
         }
     }
-    //hossein
+
     private static void constCharsIdentifier() {
 
     }
 
-    //reza
     private static void operatorIdentifier() {
         for (int i = 0; i < lang.length(); i++) {
             if (lang.charAt(i) == '=') {
@@ -547,6 +542,7 @@ public class LexicalAnalyzer {
     }
 
     private static boolean isComment(String identifier) {
+
         return identifier.startsWith("//");
     }
 
@@ -554,8 +550,7 @@ public class LexicalAnalyzer {
         return identifier.startsWith("\"") && identifier.endsWith("\"");
     }
 
-    private static void sortByKey()
-    {
+    private static void sortByKey() {
         ArrayList<Integer> sortedKeys = new ArrayList<>(allTokens.keySet());
 
         Collections.sort(sortedKeys);
