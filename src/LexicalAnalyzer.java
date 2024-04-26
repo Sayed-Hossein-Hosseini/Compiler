@@ -504,48 +504,48 @@ public class LexicalAnalyzer {
         int start = 0;
         int pointer = 0;
         while (start < lang.length()) {
-            if (lang.charAt(pointer) == 39) { // Character
+            if (lang.charAt(pointer) == 39) { // Character & 39 == '
                 pointer++;
                 if (checkPointer(pointer))
                     return;
-                if (lang.charAt(pointer) == 92) {
+                if (lang.charAt(pointer) == 92) { // 92 == \
                     pointer++;
                     if (checkPointer(pointer))
                         return;
-                    if (lang.charAt(pointer) == 39) {
+                    if (lang.charAt(pointer) == 39) { // 39 == '
                         pointer++;
                         if (checkPointer(pointer))
                             return;
-                        if (lang.charAt(pointer) == 39){
+                        if (lang.charAt(pointer) == 39){ // 39 == '
                             allTokens.put(pointer , new Token("T_Character" , "'")); // T_Character : token -> '
                         }
                     }
-                } else if (lang.charAt(pointer) == 92) {
+                } else if (lang.charAt(pointer) == 92) { // 92 == \
                     pointer++;
                     if (checkPointer(pointer))
                         return;
-                    if (lang.charAt(pointer) == 39) {
+                    if (lang.charAt(pointer) == 39) { // 39 == '
                         allTokens.put(pointer , new Token("T_Character" , "\\")); // T_Character : token -> \
                     }
                 } else {
                     pointer++;
                     if (checkPointer(pointer))
                         return;
-                    if (lang.charAt(pointer) == 39) {
+                    if (lang.charAt(pointer) == 39) { // 39 == '
                         allTokens.put(pointer , new Token("T_Character" , "'" + lang.charAt(pointer - 1) + "'")); // T_character
                     }
                 }
-            } else if (lang.charAt(pointer) == 34) {
+            } else if (lang.charAt(pointer) == 34) { // 34 == "
                 pointer++;
                 if (checkPointer(pointer))
                     return;
                 String string = "";
                 while (true) {
-                    if (lang.charAt(pointer) == 92) {
+                    if (lang.charAt(pointer) == 92) { // 92 == \
                         pointer++;
                         if (checkPointer(pointer))
                             return;
-                        if (lang.charAt(pointer) == 34) {
+                        if (lang.charAt(pointer) == 34) { // 34 == "
                             string += lang.charAt(pointer); // \"
                             pointer++;
                             if (checkPointer(pointer))
@@ -558,7 +558,7 @@ public class LexicalAnalyzer {
                                 return;
                             continue;
                         }
-                    } else if (lang.charAt(pointer) == 34) {
+                    } else if (lang.charAt(pointer) == 34) { // 34 == "
                         allTokens.put(pointer , new Token("T_String" , string)); // T_String
                         break;
                     } else {
