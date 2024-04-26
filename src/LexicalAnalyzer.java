@@ -53,6 +53,8 @@ public class LexicalAnalyzer {
     static private Map<Integer, Token> allTokens = new HashMap<>();
 
     public static void analyze() {
+        input();
+
         keywordIdentifier();
         idIdentifier();
         scopeIdentifier();
@@ -63,6 +65,16 @@ public class LexicalAnalyzer {
         constCharsIdentifier();
 
         sortByKey();
+
+        output();
+    }
+
+    private static void input() { // programm input
+
+    }
+
+    private static void output(){ // token output
+
     }
 
     private static void keywordIdentifier() {
