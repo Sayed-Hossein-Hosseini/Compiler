@@ -43,7 +43,7 @@ public class LexicalAnalyzer {
 //            "\t\t\tprint(test_function(i, j, add));\n" +
 //            "\t\t}\n" +
 //            "\t}\n" +
-//            "\tprint(\"this is\\\" a whole string no other token like '=' or 'else' or even \\\\\\\\comment should be recognized\");\n" +
+//            "\tprint(\"this is\\\" a whole string no other token like '=' or 'else' or even \\\\\\\\comment should be recogized\");\n" +
 //            "\tchar back = '\\\\';\n" +
 //            "\tchar quote = '\\'';\n" +
 //            "\tint _123 = 0XABCdef1230;\n" +
@@ -51,6 +51,7 @@ public class LexicalAnalyzer {
 
     static private Map<Integer, Token> allTokens = new HashMap<>();
     static private int numberProgramme = 0; // number programme file
+    static private int counterProgramme = 0;
 
     public static void analyze() {
         input();
@@ -88,6 +89,8 @@ public class LexicalAnalyzer {
 
                 tokenizer(); // tokenizer programm
 
+                counterProgramme++;
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -99,20 +102,16 @@ public class LexicalAnalyzer {
         Collections.sort(sortedKeys);
 
         try {
-            String dir = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output" ;
-            File directory = new File("D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output");
             String fileName = "";
+            fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output\\" + "output " + (counterProgramme + 1) + ".txt";
+            FileWriter address = new FileWriter(fileName);
 
-            for (int lengthFile = 0 ; lengthFile < numberProgramme ; lengthFile++)
-                fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output\\" + "output " + (lengthFile + 1) + ".txt";
-                FileWriter address = new FileWriter(fileName);
+            for (int x : sortedKeys) {
+                address.write(x + allTokens.get(x).toString() + "\n");
+                System.out.println(x + allTokens.get(x).toString());
+            }
 
-                for (int x : sortedKeys) {
-                    address.write(x + allTokens.get(x).toString() + "\n");
-                    System.out.println(x + allTokens.get(x).toString());
-                }
-
-                address.close();
+            address.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -559,7 +558,7 @@ public class LexicalAnalyzer {
                             continue;
                         }
                     } else if (lang.charAt(pointer) == 34) { // 34 == "
-                        allTokens.put(pointer , new Token("T_String" , string)); // T_String
+                        allTokens.put(start , new Token("T_String" , string)); // T_String
                         break;
                     } else {
                         string += lang.charAt(pointer); // continue
