@@ -4,7 +4,49 @@ import java.util.*;
 
 public class LexicalAnalyzer {
     // test String.
-    static private String lang = "";
+    static private String lang = "int test_function(int a, int b, bool c){\n" +
+            "\t// this is a function\n" +
+            "\tif (c == true){\n" +
+            "\t\treturn a+b;\n" +
+            "\t}\n" +
+            "\telse {\n" +
+            "\t\treturn a-b;\n" +
+            "\t}\n" +
+            "}\n" +
+            "\n" +
+            "int main(){\n" +
+            "\tbool add = true;\n" +
+            "\tchar _assign1 = '=';\n" +
+            "\tchar String_1[] = \" + \";\n" +
+            "\tchar String_2[] = \" - \";\n" +
+            "\tfor(int i = 0; i <= (+10 / 2); i = i + 1){\n" +
+            "\t\tfor (int j = 0x0; j != (5 * -1)  ; j = j - 1){\n" +
+            "\t\t\tprint(i);\n" +
+            "\t\t\tprint(String_1);\n" +
+            "\t\t\tprint(j);\n" +
+            "\t\t\tprint(_assign1);\n" +
+            "\t\t\tprint(test_function(i,j,add));\n" +
+            "\t\t}\n" +
+            "\t}\n" +
+            "\tadd = false;\n" +
+            "\tfor (int i = 0; !(i == +5); i = i + 1) {\n" +
+            "\t\tfor (int j = 0x0; j >= -5; j = j - 1) {\n" +
+            "\t\t\tif((i % 4) == 0 || (i % 3) == 0)\n" +
+            "\t\t\t\tcontinue;\n" +
+            "\t\t\tif(j < -4 && i > 3)\n" +
+            "\t\t\t\tbreak;\n" +
+            "\t\t\tprint(i);\n" +
+            "\t\t\tprint(String_2);\n" +
+            "\t\t\tprint(j);\n" +
+            "\t\t\tprint(_assign1);\n" +
+            "\t\t\tprint(test_function(i, j, add));\n" +
+            "\t\t}\n" +
+            "\t}\n" +
+            "\tprint(\"this is\\\" a whole string no other token like '=' or 'else' or even \\\\\\comment should be recogized\");\n" +
+            "\tchar back = '\\\\';\n" +
+            "\tchar quote = '\\'';\n" +
+            "\tint _123 = 0XABCdef1230;\n" +
+            "} ";
 //            "int test_function(int a, int b, bool c){\n" +
 //            "\t// this is a function\n" +
 //            "\tif (c == true){\n" +
@@ -54,7 +96,8 @@ public class LexicalAnalyzer {
     static private int counterProgramme = 0;
 
     public static void analyze() {
-        input();
+//        input();
+        tokenizer();
     }
 
     private static void tokenizer() {
@@ -67,6 +110,7 @@ public class LexicalAnalyzer {
         operatorIdentifier();
         whiteSpaceIdentifier();
         constCharsIdentifier();
+        commentIdentifier();
 
         output();
     }
@@ -87,7 +131,7 @@ public class LexicalAnalyzer {
                 while (programm.hasNextLine())
                     lang += programm.nextLine().strip();
 
-                tokenizer(); // tokenizer programm
+//                tokenizer(); // tokenizer programm
 
                 counterProgramme++;
 
@@ -119,6 +163,7 @@ public class LexicalAnalyzer {
     }
 
     private static void keywordIdentifier() {
+
         int start = 0;
         int pointer = 0;
         while (start < lang.length()) {
@@ -421,7 +466,20 @@ public class LexicalAnalyzer {
     }
 
     private static void scopeIdentifier() {
+        boolean inString = false;
+        boolean inComment = false;
         for (int i = 0; i < lang.length(); i++) {
+            if (lang.charAt(i) == '\"') {
+                if (lang.charAt(i - 1) != '\\')
+                    inString = !inString; // Toggle the inString flag when encountering a double quote
+            }
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) == '/') {
+                inComment = true;
+                i++;
+            }
+            if (lang.charAt(i) == '\n' && inComment) {
+                inComment = false;
+            }
             if (lang.charAt(i) == '{')
                 allTokens.put(i, new Token("T_LC", "{"));
             else if (lang.charAt(i) == '}')
@@ -447,30 +505,43 @@ public class LexicalAnalyzer {
         boolean isNumber = false;
         boolean isHex = false;
         boolean isId = false;
+        boolean inString = false;
+        boolean inComment = false;
 
         for (int i = 0; i < lang.length(); i++) {
             char currentChar = lang.charAt(i);
-            if (currentChar == '0' && (lang.charAt(i+1) == 'x' || lang.charAt(i+1) == 'X')) {
+            if (lang.charAt(i) == '\"') {
+                if (lang.charAt(i - 1) != '\\')
+                    inString = !inString; // Toggle the inString flag when encountering a double quote
+            }
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) == '/') {
+                inComment = true;
+                i++;
+            }
+            if (lang.charAt(i) == '\n' && inComment) {
+                inComment = false;
+            }
+            if (currentChar == '0' && (lang.charAt(i+1) == 'x' || lang.charAt(i+1) == 'X') && !inString && !inComment) {
                 isHex = true;
                 i++;
             }
-            if (currentChar == ' ' && isHex) {
+            if (currentChar == ' ' && isHex && !inString && !inComment) {
                 isHex = false;
             }
-            if (currentChar == '_' ) {
+            if (currentChar == '_' && !inString && !inComment) {
                 isId = true;
             }
-            if (currentChar == ' ' && isId) {
+            if (currentChar == ' ' && isId && !inString && !inComment) {
                 isId = false;
             }
-            if (Character.isDigit(currentChar) && !isHex && !isId && lang.charAt(i - 1) != '_') {
+            if (Character.isDigit(currentChar) && !isHex && !isId && lang.charAt(i - 1) != '_' && !inString && !inComment) {
                 name.append(currentChar);
                 isNumber = true;
             }
-            if ((currentChar == '+' || currentChar == '-') && Character.isDigit(lang.charAt(i + 1))) {
+            if ((currentChar == '+' || currentChar == '-') && Character.isDigit(lang.charAt(i + 1)) && !inString && !inComment) {
                 name.append(currentChar);
             }
-            if ((currentChar == ' ' || currentChar == ';' || currentChar == ')' || currentChar == ']' || currentChar == ',') && isNumber) {
+            if ((currentChar == ' ' || currentChar == ';' || currentChar == ')' || currentChar == ']' || currentChar == ',') && isNumber && !inString && !inComment) {
                 allTokens.put(i - name.length(), new Token("T_Decimal", name.toString()));
                 isHex = false;
                 isNumber = false;
@@ -480,18 +551,31 @@ public class LexicalAnalyzer {
     }
 
     private static void hexadecimalIdentifier() {
+        boolean inString = false;
+        boolean inComment = false;
         StringBuilder name = new StringBuilder();
         boolean isHex = false;
         for (int i = 0; i < lang.length(); i++) {
-            if (lang.charAt(i) == '0' && i + 1 < lang.length() && (lang.charAt(i + 1) == 'x' || lang.charAt(i + 1) == 'X')) {
+            if (lang.charAt(i) == '\"') {
+                if (lang.charAt(i - 1) != '\\')
+                    inString = !inString; // Toggle the inString flag when encountering a double quote
+            }
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) == '/') {
+                inComment = true;
+                i++;
+            }
+            if (lang.charAt(i) == '\n' && inComment) {
+                inComment = false;
+            }
+            if (lang.charAt(i) == '0' && i + 1 < lang.length() && (lang.charAt(i + 1) == 'x' || lang.charAt(i + 1) == 'X') && !inComment && !inString) {
                 name.append("0x");
                 i++; // Skip 'x' or 'X'
                 isHex = true;
             }
-            if (isHex && (Character.isDigit(lang.charAt(i)) || (lang.charAt(i) >= 'A' && lang.charAt(i) <= 'F') || (lang.charAt(i) >= 'a' && lang.charAt(i) <= 'f'))) {
+            if (isHex && (Character.isDigit(lang.charAt(i)) || (lang.charAt(i) >= 'A' && lang.charAt(i) <= 'F') || (lang.charAt(i) >= 'a' && lang.charAt(i) <= 'f')) && !inComment && !inString) {
                 name.append(lang.charAt(i));
             }
-            if (isHex && !name.isEmpty() && (lang.charAt(i) == ' ' || lang.charAt(i) == ';' || lang.charAt(i) == ')' || lang.charAt(i) == ']')) {
+            if (isHex && !name.isEmpty() && (lang.charAt(i) == ' ' || lang.charAt(i) == ';' || lang.charAt(i) == ')' || lang.charAt(i) == ']') && !inComment && !inString) {
                 allTokens.put(i - name.length(), new Token("T_Hexadecimal", name.toString()));
                 isHex = false;
                 name.setLength(0);
@@ -502,8 +586,21 @@ public class LexicalAnalyzer {
     private static void constCharsIdentifier() {
         int start = 0;
         int pointer = 0;
+        boolean inString = false;
+        boolean inComment = false;
         while (start < lang.length()) {
-            if (lang.charAt(pointer) == 39) { // Character & 39 == '
+            if (lang.charAt(pointer) == '\"') {
+                if (lang.charAt(pointer - 1) != '\\')
+                    inString = !inString; // Toggle the inString flag when encountering a double quote
+            }
+            if (lang.charAt(pointer) == '/' && lang.charAt(pointer + 1) == '/') {
+                inComment = true;
+                pointer++;
+            }
+            if (lang.charAt(pointer) == '\n' && inComment) {
+                inComment = false;
+            }
+            if (lang.charAt(pointer) == 39 && !inString && !inComment) { // Character & 39 == '
                 pointer++;
                 if (checkPointer(pointer))
                     return;
@@ -534,7 +631,7 @@ public class LexicalAnalyzer {
                         allTokens.put(pointer , new Token("T_Character" , "'" + lang.charAt(pointer - 1) + "'")); // T_character
                     }
                 }
-            } else if (lang.charAt(pointer) == 34) { // 34 == "
+            } else if (lang.charAt(pointer) == 34 && !inString && !inComment) { // 34 == "
                 pointer++;
                 if (checkPointer(pointer))
                     return;
@@ -576,8 +673,21 @@ public class LexicalAnalyzer {
     }
 
     private static void operatorIdentifier() {
+        boolean inString = false;
+        boolean inComment = false;
         for (int i = 0; i < lang.length(); i++) {
-            if (lang.charAt(i) == '=') {
+            if (lang.charAt(i) == '\"') {
+                if (lang.charAt(i - 1) != '\\')
+                    inString = !inString; // Toggle the inString flag when encountering a double quote
+            }
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) == '/') {
+                inComment = true;
+                i++;
+            }
+            if (lang.charAt(i) == '\n' && inComment) {
+                inComment = false;
+            }
+            if (lang.charAt(i) == '=' && !inString && !inComment)  {
                 if (lang.charAt(i + 1) == '=') {
                     allTokens.put(i, new Token("T_ROp_E", "=="));
                     i++;
@@ -586,7 +696,7 @@ public class LexicalAnalyzer {
                     allTokens.put(i, new Token("T_Assign", "="));
                 }
             }
-            if (lang.charAt(i) == '!') {
+            if (lang.charAt(i) == '!' && !inString && !inComment) {
                 if (lang.charAt(i + 1) == '=') {
                     allTokens.put(i, new Token("T_ROp_NE", "!="));
                     i++;
@@ -595,7 +705,7 @@ public class LexicalAnalyzer {
                     allTokens.put(i, new Token("T_LOp_NOT", "!"));
                 }
             }
-            if (lang.charAt(i) == '>') {
+            if (lang.charAt(i) == '>' && !inString && !inComment) {
                 if (lang.charAt(i + 1) == '=') {
                     allTokens.put(i, new Token("T_ROp_GE", ">="));
                     i++;
@@ -604,7 +714,7 @@ public class LexicalAnalyzer {
                     allTokens.put(i, new Token("T_ROp_G", ">"));
                 }
             }
-            if (lang.charAt(i) == '<') {
+            if (lang.charAt(i) == '<' && !inString && !inComment) {
                 if (lang.charAt(i + 1) == '=') {
                     allTokens.put(i, new Token("T_ROp_LE", "<="));
                     i++;
@@ -613,27 +723,27 @@ public class LexicalAnalyzer {
                     allTokens.put(i, new Token("T_ROp_L", "<"));
                 }
             }
-            if (lang.charAt(i) == '&' && lang.charAt(i + 1) == '&') {
+            if (lang.charAt(i) == '&' && lang.charAt(i + 1) == '&' && !inString && !inComment) {
                 allTokens.put(i, new Token("T_LOp_AND", "&&"));
                 i++;
             }
-            if (lang.charAt(i) == '|' && lang.charAt(i + 1) == '|') {
+            if (lang.charAt(i) == '|' && lang.charAt(i + 1) == '|' && !inString && !inComment) {
                 allTokens.put(i, new Token("T_LOp_OR", "||"));
                 i++;
             }
-            if (lang.charAt(i) == '+' && !Character.isDigit(lang.charAt(i + 1))) {
+            if (lang.charAt(i) == '+' && !Character.isDigit(lang.charAt(i + 1)) && !inString && !inComment) {
                 allTokens.put(i, new Token("T_AOp_PL", "+"));
             }
-            if (lang.charAt(i) == '-' && !Character.isDigit(lang.charAt(i + 1))) {
+            if (lang.charAt(i) == '-' && !Character.isDigit(lang.charAt(i + 1)) && !inString && !inComment) {
                 allTokens.put(i, new Token("T_AOp_MN", "-"));
             }
-            if (lang.charAt(i) == '*') {
+            if (lang.charAt(i) == '*' && !inString && !inComment) {
                 allTokens.put(i, new Token("T_AOp_ML", "*"));
             }
-            if (lang.charAt(i) == '/' && lang.charAt(i + 1) != '/') {
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) != '/' && !inString && !inComment) {
                 allTokens.put(i, new Token("T_AOp_DV", "/"));
             }
-            if (lang.charAt(i) == '%') {
+            if (lang.charAt(i) == '%' && !inString && !inComment) {
                 allTokens.put(i, new Token("T_AOp_RM", "%"));
             }
         }
@@ -660,6 +770,31 @@ public class LexicalAnalyzer {
                 allTokens.put(i, new Token("T_Whitespace", "\\n"));
             else if (lang.charAt(i) == 92 && lang.charAt(i + 1) == 't' && !inString && !inComment)
                 allTokens.put(i, new Token("T_Whitespace", "\\t"));
+        }
+    }
+
+    public static void commentIdentifier() {
+        StringBuilder name = new StringBuilder();
+        boolean inComment = false;
+        boolean detected = false;
+        int start = 0;
+        for (int i = 0; i < lang.length(); i++) {
+            if (lang.charAt(i) == '/' && lang.charAt(i + 1) == '/') {
+                inComment = true;
+                start = i;
+                i++;
+                detected = true;
+                name.append("/");
+            }
+            if (inComment && lang.charAt(i) == '\n') {
+                allTokens.put(start, new Token("T_Comment", name.toString()));
+                inComment = false;
+                detected = false;
+                name.setLength(0);
+            }
+            else if (inComment && detected) {
+                name.append(lang.charAt(i));
+            }
         }
     }
 
