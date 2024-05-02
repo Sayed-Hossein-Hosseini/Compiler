@@ -1,0 +1,383 @@
+0: int -> T_Int
+3:   -> T_Whitespace
+4: test_function -> T_Id
+17: ( -> T_LP
+18: int -> T_Int
+21:   -> T_Whitespace
+22: a -> T_Id
+23: , -> T_Comma
+24:   -> T_Whitespace
+25: int -> T_Int
+28:   -> T_Whitespace
+29: b -> T_Id
+30: , -> T_Comma
+31:   -> T_Whitespace
+32: bool -> T_Bool
+36:   -> T_Whitespace
+37: c -> T_Id
+38: ) -> T_RP
+39: { -> T_LC
+42: // this is a function -> T_Comment
+65: if -> T_If
+67:   -> T_Whitespace
+68: ( -> T_LP
+69: c -> T_Id
+70:   -> T_Whitespace
+71: == -> T_ROp_E
+73:   -> T_Whitespace
+74: true -> T_True
+78: ) -> T_RP
+79: { -> T_LC
+83: return -> T_Return
+89:   -> T_Whitespace
+90: a -> T_Id
+91: + -> T_AOp_PL
+92: b -> T_Id
+93: ; -> T_Semicolon
+96: } -> T_RC
+99: else -> T_Else
+103:   -> T_Whitespace
+104: { -> T_LC
+108: return -> T_Return
+114:   -> T_Whitespace
+115: a -> T_Id
+116: - -> T_AOp_MN
+117: b -> T_Id
+118: ; -> T_Semicolon
+121: } -> T_RC
+123: } -> T_RC
+126: int -> T_Int
+129:   -> T_Whitespace
+130: main -> T_Id
+134: ( -> T_LP
+135: ) -> T_RP
+136: { -> T_LC
+139: bool -> T_Bool
+143:   -> T_Whitespace
+144: add -> T_Id
+147:   -> T_Whitespace
+148: = -> T_Assign
+149:   -> T_Whitespace
+150: true -> T_True
+154: ; -> T_Semicolon
+157: char -> T_Char
+161:   -> T_Whitespace
+162: _assign1 -> T_Id
+170:   -> T_Whitespace
+171: = -> T_Assign
+172:   -> T_Whitespace
+174: = -> T_Assign
+175: '=' -> T_Character
+176: ; -> T_Semicolon
+179: char -> T_Char
+183:   -> T_Whitespace
+184: String_1 -> T_Id
+192: [ -> T_LB
+193: ] -> T_RB
+194:   -> T_Whitespace
+195: = -> T_Assign
+196:   -> T_Whitespace
+201: ;
+	char String_2[] =  -> T_String
+202: ; -> T_Semicolon
+205: char -> T_Char
+209:   -> T_Whitespace
+210: String_2 -> T_Id
+218: [ -> T_LB
+219: ] -> T_RB
+220:   -> T_Whitespace
+221: = -> T_Assign
+222:   -> T_Whitespace
+228: ; -> T_Semicolon
+231: for -> T_For
+234: ( -> T_LP
+235: int -> T_Int
+238:   -> T_Whitespace
+239: i -> T_Id
+240:   -> T_Whitespace
+241: = -> T_Assign
+242:   -> T_Whitespace
+243: 0 -> T_Decimal
+244: ; -> T_Semicolon
+245:   -> T_Whitespace
+246: i -> T_Id
+247:   -> T_Whitespace
+248: <= -> T_ROp_LE
+250:   -> T_Whitespace
+251: ( -> T_LP
+252: +10 -> T_Decimal
+255:   -> T_Whitespace
+256: / -> T_AOp_DV
+257:   -> T_Whitespace
+258: 2 -> T_Decimal
+259: ) -> T_RP
+260: ; -> T_Semicolon
+261:   -> T_Whitespace
+262: i -> T_Id
+263:   -> T_Whitespace
+264: = -> T_Assign
+265:   -> T_Whitespace
+266: i -> T_Id
+267:   -> T_Whitespace
+268: + -> T_AOp_PL
+269:   -> T_Whitespace
+270: 1 -> T_Decimal
+271: ) -> T_RP
+272: { -> T_LC
+276: for -> T_For
+279:   -> T_Whitespace
+280: ( -> T_LP
+281: int -> T_Int
+284:   -> T_Whitespace
+285: j -> T_Id
+286:   -> T_Whitespace
+287: = -> T_Assign
+288:   -> T_Whitespace
+289: 0x0 -> T_Hexadecimal
+292: ; -> T_Semicolon
+293:   -> T_Whitespace
+294: j -> T_Id
+295:   -> T_Whitespace
+296: != -> T_ROp_NE
+298:   -> T_Whitespace
+299: ( -> T_LP
+300: 5 -> T_Decimal
+301:   -> T_Whitespace
+302: * -> T_AOp_ML
+303:   -> T_Whitespace
+304: -1 -> T_Decimal
+306: ) -> T_RP
+307:   -> T_Whitespace
+308:   -> T_Whitespace
+309: ; -> T_Semicolon
+310:   -> T_Whitespace
+311: j -> T_Id
+312:   -> T_Whitespace
+313: = -> T_Assign
+314:   -> T_Whitespace
+315: j -> T_Id
+316:   -> T_Whitespace
+317: - -> T_AOp_MN
+318:   -> T_Whitespace
+319: 1 -> T_Decimal
+320: ) -> T_RP
+321: { -> T_LC
+326: print -> T_Print
+331: ( -> T_LP
+332: i -> T_Id
+333: ) -> T_RP
+334: ; -> T_Semicolon
+339: print -> T_Print
+344: ( -> T_LP
+345: String_1 -> T_Id
+353: ) -> T_RP
+354: ; -> T_Semicolon
+359: print -> T_Print
+364: ( -> T_LP
+365: j -> T_Id
+366: ) -> T_RP
+367: ; -> T_Semicolon
+372: print -> T_Print
+377: ( -> T_LP
+378: _assign1 -> T_Id
+386: ) -> T_RP
+387: ; -> T_Semicolon
+392: print -> T_Print
+397: ( -> T_LP
+398: test_function -> T_Id
+411: ( -> T_LP
+412: i -> T_Id
+413: , -> T_Comma
+414: j -> T_Id
+415: , -> T_Comma
+416: add -> T_Id
+419: ) -> T_RP
+420: ) -> T_RP
+421: ; -> T_Semicolon
+425: } -> T_RC
+428: } -> T_RC
+431: add -> T_Id
+434:   -> T_Whitespace
+435: = -> T_Assign
+436:   -> T_Whitespace
+437: false -> T_False
+442: ; -> T_Semicolon
+445: for -> T_For
+448:   -> T_Whitespace
+449: ( -> T_LP
+450: int -> T_Int
+453:   -> T_Whitespace
+454: i -> T_Id
+455:   -> T_Whitespace
+456: = -> T_Assign
+457:   -> T_Whitespace
+458: 0 -> T_Decimal
+459: ; -> T_Semicolon
+460:   -> T_Whitespace
+461: ! -> T_LOp_NOT
+462: ( -> T_LP
+463: i -> T_Id
+464:   -> T_Whitespace
+465: == -> T_ROp_E
+467:   -> T_Whitespace
+468: +5 -> T_Decimal
+470: ) -> T_RP
+471: ; -> T_Semicolon
+472:   -> T_Whitespace
+473: i -> T_Id
+474:   -> T_Whitespace
+475: = -> T_Assign
+476:   -> T_Whitespace
+477: i -> T_Id
+478:   -> T_Whitespace
+479: + -> T_AOp_PL
+480:   -> T_Whitespace
+481: 1 -> T_Decimal
+482: ) -> T_RP
+483:   -> T_Whitespace
+484: { -> T_LC
+488: for -> T_For
+491:   -> T_Whitespace
+492: ( -> T_LP
+493: int -> T_Int
+496:   -> T_Whitespace
+497: j -> T_Id
+498:   -> T_Whitespace
+499: = -> T_Assign
+500:   -> T_Whitespace
+501: 0x0 -> T_Hexadecimal
+504: ; -> T_Semicolon
+505:   -> T_Whitespace
+506: j -> T_Id
+507:   -> T_Whitespace
+508: >= -> T_ROp_GE
+510:   -> T_Whitespace
+511: -5 -> T_Decimal
+513: ; -> T_Semicolon
+514:   -> T_Whitespace
+515: j -> T_Id
+516:   -> T_Whitespace
+517: = -> T_Assign
+518:   -> T_Whitespace
+519: j -> T_Id
+520:   -> T_Whitespace
+521: - -> T_AOp_MN
+522:   -> T_Whitespace
+523: 1 -> T_Decimal
+524: ) -> T_RP
+525:   -> T_Whitespace
+526: { -> T_LC
+531: if -> T_If
+533: ( -> T_LP
+534: ( -> T_LP
+535: i -> T_Id
+536:   -> T_Whitespace
+537: % -> T_AOp_RM
+538:   -> T_Whitespace
+539: 4 -> T_Decimal
+540: ) -> T_RP
+541:   -> T_Whitespace
+542: == -> T_ROp_E
+544:   -> T_Whitespace
+545: 0 -> T_Decimal
+546:   -> T_Whitespace
+547: || -> T_LOp_OR
+549:   -> T_Whitespace
+550: ( -> T_LP
+551: i -> T_Id
+552:   -> T_Whitespace
+553: % -> T_AOp_RM
+554:   -> T_Whitespace
+555: 3 -> T_Decimal
+556: ) -> T_RP
+557:   -> T_Whitespace
+558: == -> T_ROp_E
+560:   -> T_Whitespace
+561: 0 -> T_Decimal
+562: ) -> T_RP
+568: continue -> T_Continue
+576: ; -> T_Semicolon
+581: if -> T_If
+583: ( -> T_LP
+584: j -> T_Id
+585:   -> T_Whitespace
+586: < -> T_ROp_L
+587:   -> T_Whitespace
+588: -4 -> T_Decimal
+590:   -> T_Whitespace
+591: && -> T_LOp_AND
+593:   -> T_Whitespace
+594: i -> T_Id
+595:   -> T_Whitespace
+596: > -> T_ROp_G
+597:   -> T_Whitespace
+598: 3 -> T_Decimal
+599: ) -> T_RP
+605: break -> T_Break
+610: ; -> T_Semicolon
+615: print -> T_Print
+620: ( -> T_LP
+621: i -> T_Id
+622: ) -> T_RP
+623: ; -> T_Semicolon
+628: print -> T_Print
+633: ( -> T_LP
+634: String_2 -> T_Id
+642: ) -> T_RP
+643: ; -> T_Semicolon
+648: print -> T_Print
+653: ( -> T_LP
+654: j -> T_Id
+655: ) -> T_RP
+656: ; -> T_Semicolon
+661: print -> T_Print
+666: ( -> T_LP
+667: _assign1 -> T_Id
+675: ) -> T_RP
+676: ; -> T_Semicolon
+681: print -> T_Print
+686: ( -> T_LP
+687: test_function -> T_Id
+700: ( -> T_LP
+701: i -> T_Id
+702: , -> T_Comma
+703:   -> T_Whitespace
+704: j -> T_Id
+705: , -> T_Comma
+706:   -> T_Whitespace
+707: add -> T_Id
+710: ) -> T_RP
+711: ) -> T_RP
+712: ; -> T_Semicolon
+716: } -> T_RC
+719: } -> T_RC
+722: print -> T_Print
+727: ( -> T_LP
+728: this is" a whole string no other token like '=' or 'else' or even \comment should be recogized -> T_String
+827: ) -> T_RP
+828: ; -> T_Semicolon
+831: char -> T_Char
+835:   -> T_Whitespace
+836: back -> T_Id
+840:   -> T_Whitespace
+841: = -> T_Assign
+842:   -> T_Whitespace
+847: ; -> T_Semicolon
+850: char -> T_Char
+854:   -> T_Whitespace
+855: quote -> T_Id
+860:   -> T_Whitespace
+861: = -> T_Assign
+862:   -> T_Whitespace
+866: ' -> T_Character
+867: ; -> T_Semicolon
+870: int -> T_Int
+873:   -> T_Whitespace
+874: _123 -> T_Id
+878:   -> T_Whitespace
+879: = -> T_Assign
+880:   -> T_Whitespace
+881: 0xABCdef1230 -> T_Hexadecimal
+893: ; -> T_Semicolon
+895: } -> T_RC
+896:   -> T_Whitespace
