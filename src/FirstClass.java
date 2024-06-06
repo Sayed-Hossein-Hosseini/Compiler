@@ -55,7 +55,7 @@ public class FirstClass {
     static int prevr, prevc;
     static int ntc;
 
-    public static void firstCalculator(char c, int hop) {
+    private static void firstCalculator(char c, int hop) {
         if (c != '#') { // not a null
             for (int i = 0; i < prodCount; i++) {
                 int prodIndex = i;
@@ -88,7 +88,20 @@ public class FirstClass {
 
     }
 
-    public static void main(String[] args) {
+    private static void firstTokenGenerator() {
+        for (int i = 0; i < frst.size() - 1; i++) {
+            if (Character.isDigit(frst.get(i)) && Character.isDigit(frst.get(i+1))) {
+                String str = String.valueOf(frst.get(i)) + frst.get(i + 1);
+                //System.out.println(str);
+                first.add(table[Integer.parseInt(str)]);
+            }
+            else if (frst.get(i) ==  '#') {
+                first.add("#");
+            }
+        }
+    }
+
+    private void testFirst() { // getting grammar and printing the first value for chosen variable
         Scanner scanner = new Scanner(System.in);
         frc = 0;
         System.out.print("Number of productions? ");
@@ -105,20 +118,17 @@ public class FirstClass {
 
         System.out.print("\nfirst of " + ip.charAt(0) + " is : {");
         firstCalculator(ip.charAt(0), 0);
-        for (int i = 0; i < frst.size() - 1; i++) {
-            if (Character.isDigit(frst.get(i)) && Character.isDigit(frst.get(i+1))) {
-                String str = String.valueOf(frst.get(i)) + frst.get(i + 1);
-                //System.out.println(str);
-                first.add(table[Integer.parseInt(str)]);
-            }
-            else if (frst.get(i) ==  '#') {
-                first.add("#");
-            }
-        }
         for (String c : first) {
             System.out.print(" " + c);
         }
         System.out.print(" }");
+    }
+
+
+    public static void main(char c, int hop) {
+
+        firstCalculator(c, hop);
+        firstTokenGenerator();
     }
 }
 
