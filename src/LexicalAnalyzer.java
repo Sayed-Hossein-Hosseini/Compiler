@@ -92,8 +92,8 @@ public class LexicalAnalyzer {
 //            "}";
 
     static private Map<Integer, Token> allTokens = new HashMap<>();
-    static private int numberProgramme = 0; // number programme file
-    static private int counterProgramme = 0;
+    static private int numberProgram = 0; // number program file
+    static private int counterProgram = 0;
 
     public static void analyze() {
 //        input();
@@ -121,9 +121,9 @@ public class LexicalAnalyzer {
             File directory = new File("D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input");
             String [] input = directory.list();
             String fileName = "";
-            numberProgramme = input.length;
+            numberProgram = input.length;
 
-            for (int lengthFile = 0 ; lengthFile < numberProgramme ; lengthFile++)
+            for (int lengthFile = 0; lengthFile < numberProgram; lengthFile++)
                 fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\input\\" + input[lengthFile];
                 File address = new File(fileName);
                 Scanner programm = new Scanner(address);
@@ -133,7 +133,7 @@ public class LexicalAnalyzer {
 
 //                tokenizer(); // tokenizer programm
 
-                counterProgramme++;
+                counterProgram++;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -147,7 +147,7 @@ public class LexicalAnalyzer {
 
         try {
             String fileName = "";
-            fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output\\" + "output " + (counterProgramme + 1) + ".txt";
+            fileName = "D:\\University\\Term 6\\Compiler design\\Project\\Compiler\\data\\output\\" + "output " + (counterProgram + 1) + ".txt";
             FileWriter address = new FileWriter(fileName);
 
             for (int x : sortedKeys) {
